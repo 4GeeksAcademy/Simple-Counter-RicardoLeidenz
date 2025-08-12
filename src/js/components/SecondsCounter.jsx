@@ -7,16 +7,14 @@ const SecondsCounter = ({time}) => {
 	const timeString = time.toString()
 	const numbers = [...timeString];
 	return (
-		<div className="row justify-content-center">
-            <div className="col-8 justify-content-center bg-dark rounded d-flex">
-				<div className="col-1 bg-secondary rounded text-center fs-1 text-white m-1">
-                	<FontAwesomeIcon icon={faClock}/>
-            	</div>
-				{numbers.map((num) => {
-						return(<Digit number={num}/>)
-					}
-				)}
+		<div className="col-10 justify-content-center bg-dark rounded d-flex p-3 border border-light">
+			<div className="col-1 bg-secondary rounded text-center fs-1 text-white m-1 border border-light">
+				<FontAwesomeIcon icon={faClock}/>
 			</div>
+			{numbers.map((num) => {
+					return(<Digit number={num}/>)
+				}
+			)}
 		</div>
 	);
 };
