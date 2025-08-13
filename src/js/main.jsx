@@ -11,6 +11,7 @@ import '../styles/index.css'
 import SecondsCounter from './components/SecondsCounter';
 
 let timePassed = 0;
+let countdown = 0;
 let timerState = true;
 let buttonState = {label:"Stop", class:"col-1 btn btn-danger rounded text-center fs-5 p-3 m-2 border border-light"}
 
@@ -29,9 +30,19 @@ const changeTimerState = () =>{
   }
 }
 
+const setCountdown = (countdownTime) => {
+  countdown = countdownTime
+}
+
 const reRender = () => {
   if (timerState){
-    timePassed += 1
+    if (countdown == 0){
+      timePassed += 1 
+    }
+    else {
+      countdown -= 1
+      timePassed = countdown
+    }
   }
   root.render(
   <React.StrictMode>
@@ -43,7 +54,14 @@ const reRender = () => {
     </div>
 		<div className="row justify-content-center m-4">
       <button type="button" class={buttonState.class} onClick={changeTimerState}>{buttonState.label}</button>
-      <button type="button" class="col-2 btn btn-warning rounded text-center fs-5 p-3 m-2 border border-lightr">Set Countdown</button>
+      <button type="button" data-bs-toggle="dropdown" class="col-2 btn btn-warning rounded text-center fs-5 p-3 m-2 border border-lightr">Set Countdown</button>
+      <div class="input-group">
+        <ul class="dropdown-menu">
+          <li><button onClick={setCountdown(10)} class="dropdown-item">10</button></li>
+          <li><button onClick={setCountdown(30)} class="dropdown-item">30</button></li>
+          <li><button onClick={setCountdown(10)} class="dropdown-item">60</button></li>
+        </ul>
+      </div>
     </div>
   </React.StrictMode>,
   )
